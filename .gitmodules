@@ -1,0 +1,9 @@
+[submodule "libft"]
+	path = libft
+	url = https://github.com/nithramus/libft
+[submodule "libft_chained_list"]
+	path = libft_chained_list
+	url = https://github.com/nithramus/libft_chained_list
+[submodule "ft_p_client/libft"]
+	path = ft_p_client/libft
+	url = https://github.com/nithramus/libft
