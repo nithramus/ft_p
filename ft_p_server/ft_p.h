@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 12:21:11 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/19 15:41:12 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/21 00:36:24 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,14 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <netdb.h>
+#include <sys/types.h>
+#include <dirent.h>
+
+
+int cd(int cs, char *buff, char *mwd, char **cwd);
+void exit_error(int err);
+int grequest(int cs, char *mwd);
+int screquest(int cs, char *response);
+int pwd(int cs);
+int ls(int cs, char *cwd);
 #endif

@@ -6,22 +6,13 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 12:02:29 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/20 01:05:00 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/20 22:34:16 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_p.h"
 
-void exit_error(int err)
-{
-    if (err == 1)
-        ft_putendl("usage: ./ft_p [PORT]");
-    if (err == 2)
-        ft_putendl("Failed to create socket");
-    if (err == 3)
-        ft_putendl("Failed to write");
-    exit(1);
-}
+
 
 int create_server(int port)
 {
@@ -48,28 +39,44 @@ void send_response(char buff[1024], int cs)
         exit_error(3);
 }
 
+
+
+
+int     get_connections(int sock, char *mwd)
+{
+    struct sockaddr_in csin;
+    unsigned int addrlen;
+    int pid;
+    int cs;
+
+    cs = accept(sock, (struct sockaddr*) &csin, &addrlen);
+    pid = fork();
+    if (pid == 0)
+    {
+        grequest(cs, mwd);
+        close(cs);
+        exit(0);
+    }
+    return (1);
+}
+
 int main(int argc, char **argv)
 {
     int sock;
-    int cs;
-    unsigned int addrlen;
-    struct sockaddr_in csin;
-    int r;
-    char buff[1024];
+    char buff[4097];
+    char *mwd;
+
     if (argc < 2)
         exit_error(1);
+    mwd = getcwd(buff, 4096);
+    ft_printf("%p\n%p\n", mwd, buff);
+    if (!mwd)
+        exit_error(4);
     sock = create_server(atoi(argv[1]));
-        cs = accept(sock, (struct sockaddr*) &csin, &addrlen);
     while (1)
     {
-        r = read(cs, buff, 1023);
-        buff[r] = '\0';
-        ft_putendl("test");
-        ft_putendl(buff);
-        // if (r >= 0)
-        //     send_response(buff, cs);
+        get_connections(sock, buff);
     }
-    close(cs);
     close(sock);
     return (0);
 }

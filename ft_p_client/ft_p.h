@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 12:21:11 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/20 00:42:14 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/20 12:08:29 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void exit_error(int err);
 int    upload(char *request, int cs);
 int   screquest(char *s, int cs);
 int     request(char *request, int cs);
+char    *get_filename(char *request);
 
 
 #endif

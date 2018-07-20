@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 19:51:47 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/20 01:07:51 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/21 00:46:31 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,18 @@
 */
 int    sbrequest(char value, int cs)
 {
-    char    buff[6];
+    char    buff[4097];
     int     r;
 
     if (write(cs, &value, 1) == -1)
         exit_error(4);
-    if ((r = read(cs, buff, 5)) == -1)
+    if ((r = read(cs, buff, 4096)) == -1)
     {
         return (-1);
     }
     buff[r] = '\0';
     ft_putstr(buff);
     ft_putstr("\n");
-    if (r == -1)
-        exit_error(5);
     return (0);
 }
 
@@ -58,13 +56,32 @@ int   screquest(char *s, int cs)
     return (0);
 }
 
+int     cd(char *request, int cs)
+{
+    char *filename;
+    char *tmp;
+
+    filename = get_filename(request);
+    if (!filename)
+        return (-1);
+    tmp = malloc(ft_strlen(filename));
+    if (!tmp)
+        return (-1);
+    tmp[0] = 2;
+    ft_strcpy(tmp + 1, filename);
+    screquest(tmp, cs);
+    free(filename);
+    free(tmp);
+    return (0);
+}
+
 int     request(char *request, int cs)
 {
     ft_putendl(request);
     if (ft_strcmp(request, "ls") == 0)
         sbrequest(1, cs);
-    else if (ft_strcmp(request, "cd") == 0)
-        sbrequest(2, cs);
+    else if (ft_strncmp(request, "cd", 2) == 0)
+        cd(request, cs);
     else if (ft_strcmp(request, "pwd") == 0)
         sbrequest(3, cs);
     // else if (ft_strncmp(request, "get", 3) == 0)

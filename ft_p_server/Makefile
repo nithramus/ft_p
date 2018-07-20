@@ -6,7 +6,7 @@
 #    By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/18 12:13:38 by nithramir         #+#    #+#              #
-#    Updated: 2018/07/19 20:58:53 by nithramir        ###   ########.fr        #
+#    Updated: 2018/07/20 23:53:18 by nithramir        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,16 +14,20 @@ NAME = ft_p_server
 
 SRC_PATH = ft_p_src
 
-
 OBJ_PATH = ft_p_obj
 
 H_FILES= ft_p.h
 
-SRC = main_server.o
+SRC = main_server.o\
+	  exit_errors.o\
+	  request.o\
+	  pwd.o\
+	  ls.o\
+	  cd.o\
 
-CC = gcc -g -I.
+CC = gcc -g -I. -fsanitize=address
 
-FLAG = -Wall -Wextra -O -Werror
+FLAG = -Wall -Wextra -O # -Werror
 
 LIB = libft/libftprintf.a libft_chained_list/libft_chained_list.a
 
