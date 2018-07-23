@@ -6,7 +6,7 @@
 #    By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/18 12:13:38 by nithramir         #+#    #+#              #
-#    Updated: 2018/07/20 22:57:37 by nithramir        ###   ########.fr        #
+#    Updated: 2018/07/24 00:39:23 by nithramir        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC = main_client.o\
 	  request.o\
 	  upload.o\
 	  get_filename.o\
+	  cd.o\
 
 CC = gcc -g -I.
 

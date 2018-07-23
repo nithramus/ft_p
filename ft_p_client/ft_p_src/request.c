@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 19:51:47 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/23 15:40:32 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/24 00:50:11 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int    sbrequest(char value, int cs)
     int size;
 
     size = 5;
-    ft_strncpy(buff, &size, 4);
-    buff[4] = 1;
-    if (write(cs, buff, 5) == -1)
+    if (write(cs, &size, 4) == -1)
+        exit_error(4);
+    if (write(cs, &value, 1) == -1)
         exit_error(4);
     if ((r = read(cs, buff, 4096)) == -1)
     {
@@ -43,7 +43,12 @@ int   screquest(char *s, int cs)
 {
     char    buff[1096];
     int     r;
+    int     value;
 
+
+    value = ft_strlen(s) + 4;
+    if (write(cs, &value, 4) == -1)
+        exit_error(4);
     if (write(cs, s, ft_strlen(s)) == -1)
         exit_error(4);
     // r = read(cs, buff, 1095);
@@ -57,25 +62,6 @@ int   screquest(char *s, int cs)
     //     ft_putendl(buff);
     //     return (-1);
     // }
-    return (0);
-}
-
-int     cd(char *request, int cs)
-{
-    char *filename;
-    char *tmp;
-
-    filename = get_filename(request);
-    if (!filename)
-        return (-1);
-    tmp = malloc(ft_strlen(filename));
-    if (!tmp)
-        return (-1);
-    tmp[0] = 2;
-    ft_strcpy(tmp + 1, filename);
-    screquest(tmp, cs);
-    free(filename);
-    free(tmp);
     return (0);
 }
 

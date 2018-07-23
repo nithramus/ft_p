@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 22:33:40 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/21 16:47:36 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/24 01:25:20 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int     send_file(int fd, int cs)
     buff[0] = 5;
     while ((r = read(fd, &buff[1], 4095)))
     {
-        buff[r + 1] = '\0';
-        if (r < 4095)
+        buff[r] = '\0';
+        if (r < 4096)
             buff[0] = 6;
         if (screquest(buff, cs))
             return (-1);

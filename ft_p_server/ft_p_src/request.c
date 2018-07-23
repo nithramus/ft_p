@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 16:41:20 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/23 15:38:31 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/24 01:26:06 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int screquest(int cs, char *response)
 int list_request(int cs, char *buff, char *mwd, char **cwd)
 {
     int r;
-    char test;
 
     r = 0;
     ft_putendl("mais what");
@@ -50,7 +49,7 @@ char *gfrequest(int cs, int paquet_size)
         return (NULL);
     data[paquet_size] = '\0';
     tmp = data;
-    while(paquet_size > 0)
+    while (paquet_size > 0)
     {
         r = read(cs, tmp, paquet_size);
         if (r <= 0)
@@ -62,12 +61,11 @@ char *gfrequest(int cs, int paquet_size)
     return (data);
 }
 
-int wrequest(int cs, char *mwd, char **cwd)
+int wrequest(int cs)
 {
     char buff[4];
     int r;
     int paquet_size;
-    char    *data;
 
     r = read(cs, buff, 4);
     if (r < 4)
@@ -75,11 +73,19 @@ int wrequest(int cs, char *mwd, char **cwd)
     paquet_size = *(int*)buff;
     paquet_size -= 4;
     ft_printf("yolo %d\n", paquet_size);
+    return (paquet_size);
+}
+
+char *garequest(int cs)
+{
+    int paquet_size;
+    char    *data;
+
+    if ((paquet_size = wrequest(cs)) == -1)
+        return (NULL);
     if ((data = gfrequest(cs, paquet_size)) == NULL)
-        return (-1);
-    if (list_request(cs, data, mwd, cwd) == -1)
-        return (-1);
-    return (0);
+        return (NULL);
+    return (data);
 }
 
 int grequest(int cs, char *mwd)
@@ -87,6 +93,7 @@ int grequest(int cs, char *mwd)
     int con;
     char cwd[4097];
     char *response;
+    char    *data;
 
     con = 1;
     response = getcwd(cwd, 4096);
@@ -94,7 +101,10 @@ int grequest(int cs, char *mwd)
         return (-1);
     while (con != -1)
     {
-        con = wrequest(cs, mwd, &cwd);
+        if (!(data = garequest(cs)))
+            return (NULL);
+        if (list_request(cs, data, mwd, &cwd) == -1)
+            return (-1);
     }
     return (0);
 }

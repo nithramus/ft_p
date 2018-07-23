@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/21 14:56:17 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/21 16:36:07 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/24 01:26:57 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int receivef(int cs, int fd)
 {
-    char buff[4096];
+    char *data;
 
-    if (read(cs, buff, 4096) <= 0)
+    if (!(data = garequest(cs)))
+        return (0);
+    if (write(fd, data + 1, ft_strlen(data)) == -1)
         return (-1);
-    if (write(fd, buff + 1, 4095) == -1)
-        return (-1);
-    if (buff[0] == 5)
+    if (data[0] == 5)
         return (1);
     else
         return (0);
@@ -34,6 +34,7 @@ int upload(int cs, char *buff)
 
     contin = 1;
     ft_putendl("coucou");
+    ft_putendl(buff);
     fd = open(buff + 1, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
     while (contin)
     {
