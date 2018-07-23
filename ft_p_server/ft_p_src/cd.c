@@ -6,13 +6,19 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 23:53:11 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/21 00:35:37 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/21 14:45:24 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_p.h"
 
 
+int valid_path(char *mwd, char *path)
+{
+    if (ft_strncmp(mwd, path, ft_strlen(mwd)) == 0)
+        return (0);
+    return (-1);
+}
 
 int cd(int cs, char *path, char *mwd, char **cwd)
 {
@@ -29,6 +35,11 @@ int cd(int cs, char *path, char *mwd, char **cwd)
     if (!response)
         return (-1);
     ft_putendl(buff);
-    //chwdr
-    // testvalidpath
+    if (valid_path(mwd, response) == -1)
+    {
+        chdir(mwd);
+        return (0);
+    }
+    *cwd = response;
+    return (0);
 }

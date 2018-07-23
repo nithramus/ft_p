@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 12:21:11 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/21 00:36:24 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/21 15:20:42 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,16 @@
 #include <netdb.h>
 #include <sys/types.h>
 #include <dirent.h>
-
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 int cd(int cs, char *buff, char *mwd, char **cwd);
 void exit_error(int err);
 int grequest(int cs, char *mwd);
 int screquest(int cs, char *response);
 int pwd(int cs);
-int ls(int cs, char *cwd);
+int ls(int cs);
+int upload(int cs, char *buff);
+
 #endif

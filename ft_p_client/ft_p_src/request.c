@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 19:51:47 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/21 00:46:31 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/23 15:40:32 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@ int    sbrequest(char value, int cs)
 {
     char    buff[4097];
     int     r;
+    int size;
 
-    if (write(cs, &value, 1) == -1)
+    size = 5;
+    ft_strncpy(buff, &size, 4);
+    buff[4] = 1;
+    if (write(cs, buff, 5) == -1)
         exit_error(4);
     if ((r = read(cs, buff, 4096)) == -1)
     {
