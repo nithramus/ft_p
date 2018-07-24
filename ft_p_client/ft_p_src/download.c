@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 12:01:54 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/24 15:28:08 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/24 17:48:18 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ int receive_file(char *filename, int cs)
     while (con)
     {
         data = garequest(cs);
-        ft_putendl(data);
         if (data)
         {
             if (data[0] != 6)
                 con = 0;
-            ft_putendl(data);
+            write(fd, data, ft_strlen(data));
+            free(data);
         }
         else
             return (-1);
@@ -66,7 +66,6 @@ int download(char *request, int cs)
     char    *filename;
 
     filename = get_filename(request);
-    ft_putendl(request);
     if (!filename)
     {
         ft_putendl("No filename");
@@ -82,7 +81,6 @@ int download(char *request, int cs)
         ft_putendl("sould delete the file");
         return (-1);
     }
-    ft_putendl("finished");
     return (0);
 
 }

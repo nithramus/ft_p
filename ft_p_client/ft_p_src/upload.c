@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 22:33:40 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/24 12:12:05 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/24 17:37:56 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ int     send_file(int fd, int cs)
     char    buff[4097];
     int     r;
 
-    buff[0] = 6;
+    buff[0] = 5;
     while ((r = read(fd, &buff[1], 4095)))
     {
         buff[r] = '\0';
         if (r < 4096)
-            buff[0] = 7;
+            buff[0] = 6;
         if (screquest(buff, cs))
             return (-1);
     }
@@ -54,7 +54,6 @@ int    upload(char *request, int cs)
         ft_putendl("Problem getting filename");
         return -1;
     }
-    ft_putendl(filename);
     fd = open(filename, O_RDONLY);
     if (fd == -1)
     {

@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 12:02:29 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/20 22:34:16 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/24 16:32:32 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int create_server(int port)
 
 void send_response(char buff[1024], int cs)
 {
-    ft_putendl(buff);
     if (write(cs, "cava", 4) == -1)
         exit_error(3);
 }
@@ -69,14 +68,11 @@ int main(int argc, char **argv)
     if (argc < 2)
         exit_error(1);
     mwd = getcwd(buff, 4096);
-    ft_printf("%p\n%p\n", mwd, buff);
     if (!mwd)
         exit_error(4);
     sock = create_server(atoi(argv[1]));
     while (1)
-    {
         get_connections(sock, buff);
-    }
     close(sock);
     return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 18:08:58 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/23 13:02:02 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/24 16:32:10 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int ls(int cs)
     int     size;
 
     first = NULL;
-    ft_putendl("entree");
     size = 0;
     list_files(&first);
     function_on_chained_list(&first, count, &size);
@@ -76,7 +75,6 @@ int ls(int cs)
     if (!string)
         return (-1);
     function_on_chained_list(&first, concat, &string);
-    ft_putendl(save);
     screquest(cs, save);
     free(save);
     delete_chained_list(&first, free);

@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/21 14:56:17 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/24 14:53:12 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/24 16:31:46 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ int upload(int cs, char *buff)
     int fd;
 
     contin = 1;
-    ft_putendl("coucou");
-    ft_putendl(buff);
+    if (ft_strchr(buff + 1, '/'))
+    {
+        ft_putendl("invalid caractere");
+        return (-1);
+    }
     fd = open(buff + 1, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
     while (contin)
-    {
-        ft_putendl("coucou2");
         contin = receivef(cs, fd);
-    }
     close(fd);
     return (0);
 }

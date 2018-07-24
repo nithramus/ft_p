@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 23:53:11 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/21 14:45:24 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/24 16:39:28 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int cd(int cs, char *path, char *mwd, char **cwd)
     response = getcwd(buff, 4096);
     if (!response)
         return (-1);
-    ft_putendl(buff);
     if (valid_path(mwd, response) == -1)
     {
         chdir(mwd);

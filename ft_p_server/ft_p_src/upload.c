@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 12:31:56 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/24 15:25:47 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/24 16:39:21 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int     send_file(int fd, int cs)
     while ((r = read(fd, buff + 1, 4095)))
     {
         buff[r] = '\0';
-        ft_putendl(buff);
         if (r < 4095)
             buff[0] = 7;
         if (screquest(cs, buff))
@@ -38,6 +37,11 @@ int    download(int cs, char *request)
     int     fd;
 
     ft_putendl(request + 1);
+    if (ft_strchr(request, '/'))
+    {
+        ft_putendl("invalid caractere");
+        return (-1);
+    }
     fd = open(request + 1, O_RDONLY);
     if (fd == -1)
     {

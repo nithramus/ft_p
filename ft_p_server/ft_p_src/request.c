@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 16:41:20 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/24 14:45:25 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/24 17:46:58 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int screquest(int cs, char *response)
 
     value = ft_strlen(response) + 4;
     if (write(cs, &value, 4) == -1)
-        exit_error(4);
+        return (-1);
     if (write(cs, response, ft_strlen(response)) == -1)
         return (-1);
     return (0);
@@ -29,8 +29,6 @@ int list_request(int cs, char *buff, char *mwd, char **cwd)
     int r;
 
     r = 0;
-    ft_putendl("mais what");
-    ft_printf("%d\n", (int)(char)buff[0]);
     if (buff[0] == 1)
         r = ls(cs);
     if (buff[0] == 2)
@@ -62,7 +60,6 @@ char *gfrequest(int cs, int paquet_size)
         tmp += r;
         paquet_size -= r;
     }
-    ft_putendl(data);
     return (data);
 }
 
@@ -77,7 +74,6 @@ int wrequest(int cs)
         return (-1);
     paquet_size = *(int*)buff;
     paquet_size -= 4;
-    ft_printf("yolo %d\n", paquet_size);
     return (paquet_size);
 }
 
@@ -109,7 +105,8 @@ int grequest(int cs, char *mwd)
         if (!(data = garequest(cs)))
             return (NULL);
         if (list_request(cs, data, mwd, &cwd) == -1)
-            return (-1);
+            ft_putendl("Error happened");
+        free(data);
     }
     return (0);
 }

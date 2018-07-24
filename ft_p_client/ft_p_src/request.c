@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 19:51:47 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/24 14:46:13 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/24 17:43:40 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ char *gfrequest(int cs, int paquet_size)
         tmp += r;
         paquet_size -= r;
     }
-    ft_putendl(data);
     return (data);
 }
 
@@ -45,9 +44,12 @@ int wrequest(int cs)
         return (-1);
     paquet_size = *(int*)buff;
     paquet_size -= 4;
-    ft_printf("yolo %d\n", paquet_size);
     return (paquet_size);
 }
+
+/*
+    Get the size of the data send, and then wait for all the packet to came
+*/
 
 char *garequest(int cs)
 {
@@ -76,10 +78,8 @@ int    sbrequest(char value, int cs)
     if (write(cs, &value, 1) == -1)
         exit_error(4);
     if (!(response = garequest(cs)))
-    {
         return (-1);
-    }
-    ft_putstr(response);
+    ft_putstr(response + 1);
     ft_putstr("\n");
     return (0);
 }
@@ -96,37 +96,32 @@ int   screquest(char *s, int cs)
 
     value = ft_strlen(s) + 4;
     if (write(cs, &value, 4) == -1)
-        exit_error(4);
+        return (-1);
     if (write(cs, s, ft_strlen(s)) == -1)
-        exit_error(4);
-    // r = read(cs, buff, 1095);
-    // if (r == -1)
-    // {
-    //     ft_putendl("Erreur reseau");
-    //     return (r);
-    // }
-    // if (ft_strcmp(buff, "ok") != 0)
-    // {
-    //     ft_putendl(buff);
-    //     return (-1);
-    // }
+        return (-1);
     return (0);
 }
 
 int     request(char *request, int cs)
 {
-    ft_putendl(request);
+    int r;
+
+    r = 1;
     if (ft_strcmp(request, "ls") == 0)
-        sbrequest(1, cs);
+        r = sbrequest(1, cs);
     else if (ft_strncmp(request, "cd", 2) == 0)
-        cd(request, cs);
+        r = cd(request, cs);
     else if (ft_strcmp(request, "pwd") == 0)
-        sbrequest(3, cs);
+        r = sbrequest(3, cs);
     else if (ft_strncmp(request, "get", 3) == 0)
-        download(request, cs);
+        r = download(request, cs);
     else if (ft_strncmp(request, "put", 3) == 0)
-        upload(request, cs);
+        r = upload(request, cs);
     else
         ft_putendl("No such command");
-    return (1);
+    if (r == 0)
+        ft_putendl("SUCCESS");
+    if (r == -1)
+        ft_putendl("ERROR");
+    return (r);
 }

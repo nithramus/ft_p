@@ -30,17 +30,13 @@ int main(int argc, char **argv)
     if (argc < 3)
         exit_error(1);
     sock = create_client(argv[1], atoi(argv[2]));
+    ft_putstr("$> ");
+    // get_next_line
     while ((r = read(0, command, 4095)) != 0)
     {
         command[r - 1] = '\0';
-        ft_putendl(command);
         request(command, sock);
-        // free(command);
-        // if (write(sock, command, ft_strlen(command)) == -1)
-        //     exit_error(4);
-        // if (read(sock, buff, 1023) == -1)
-        //     exit_error(5);
-        // ft_putendl(buff);
+        ft_putstr("$> ");
     }
     close(sock);
     return (0);
