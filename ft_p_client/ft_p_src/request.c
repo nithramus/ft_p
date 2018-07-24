@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 19:51:47 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/24 17:43:40 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/25 00:06:43 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int wrequest(int cs)
     Get the size of the data send, and then wait for all the packet to came
 */
 
-char *garequest(int cs)
+char *garequest(int cs, int *size)
 {
     int paquet_size;
     char    *data;
@@ -60,6 +60,8 @@ char *garequest(int cs)
         return (NULL);
     if ((data = gfrequest(cs, paquet_size)) == NULL)
         return (NULL);
+    if (size)
+        *size = paquet_size;
     return (data);
 }
 
@@ -77,7 +79,7 @@ int    sbrequest(char value, int cs)
         exit_error(4);
     if (write(cs, &value, 1) == -1)
         exit_error(4);
-    if (!(response = garequest(cs)))
+    if (!(response = garequest(cs, NULL)))
         return (-1);
     ft_putstr(response + 1);
     ft_putstr("\n");
@@ -87,17 +89,18 @@ int    sbrequest(char value, int cs)
 /*
     Function used for complexe request like get and put
 */
-int   screquest(char *s, int cs)
+int screquest(char *response, int cs, int size)
 {
-    char    buff[1096];
-    int     r;
-    int     value;
+    int value;
 
-
-    value = ft_strlen(s) + 4;
+    value = size;
+    if (size == -1)
+        value = ft_strlen(response) + 4;
+    else
+        value += 4;
     if (write(cs, &value, 4) == -1)
         return (-1);
-    if (write(cs, s, ft_strlen(s)) == -1)
+    if (write(cs, response, value - 4) == -1)
         return (-1);
     return (0);
 }

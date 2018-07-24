@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 23:53:11 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/24 16:39:28 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/24 23:39:12 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int valid_path(char *mwd, char *path)
     return (-1);
 }
 
-int cd(int cs, char *path, char *mwd, char **cwd)
+int cd(int cs, char *path, char *mwd)
 {
     char buff[4097];
     int size;
@@ -39,6 +39,5 @@ int cd(int cs, char *path, char *mwd, char **cwd)
         chdir(mwd);
         return (0);
     }
-    *cwd = response;
     return (0);
 }

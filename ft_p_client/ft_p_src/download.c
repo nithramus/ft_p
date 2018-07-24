@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 12:01:54 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/24 17:48:18 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/25 00:05:15 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int request_file(char *filename, int cs)
 
     buff[0] = 5;
     ft_strcpy(buff + 1, filename);
-    if (screquest(buff, cs) == -1)
+    if (screquest(buff, cs, -1) == -1)
         return (-1);
     return (1);
 }
@@ -40,18 +40,20 @@ int receive_file(char *filename, int cs)
     char *data;
     int con;
     int fd;
+    int size;
 
     con = 1;
+    size = 1;
     if ((fd = create_file(filename)) == -1)
         return (-1);
     while (con)
     {
-        data = garequest(cs);
+        data = garequest(cs, &size);
         if (data)
         {
             if (data[0] != 6)
                 con = 0;
-            write(fd, data, ft_strlen(data));
+            write(fd, data + 1, size - 1);
             free(data);
         }
         else

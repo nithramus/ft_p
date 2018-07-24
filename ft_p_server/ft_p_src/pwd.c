@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 17:30:45 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/20 17:53:08 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/24 22:37:01 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int pwd(int cs)
     }
     else
         buff[0] = 3;
-    if (screquest(cs, buff) == -1)
+    if (screquest(cs, buff, -1) == -1)
         return (-1);
     return (0);
 }

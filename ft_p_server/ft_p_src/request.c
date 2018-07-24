@@ -6,25 +6,29 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 16:41:20 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/24 17:46:58 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/24 23:48:05 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_p.h"
 
-int screquest(int cs, char *response)
+int screquest(int cs, char *response, int size)
 {
     int value;
 
-    value = ft_strlen(response) + 4;
+    value = size;
+    if (size == -1)
+        value = ft_strlen(response) + 4;
+    else
+        value += 4;
     if (write(cs, &value, 4) == -1)
         return (-1);
-    if (write(cs, response, ft_strlen(response)) == -1)
+    if (write(cs, response, value - 4) == -1)
         return (-1);
     return (0);
 }
 
-int list_request(int cs, char *buff, char *mwd, char **cwd)
+int list_request(int cs, char *buff, char *mwd)
 {
     int r;
 
@@ -32,7 +36,7 @@ int list_request(int cs, char *buff, char *mwd, char **cwd)
     if (buff[0] == 1)
         r = ls(cs);
     if (buff[0] == 2)
-        r= cd(cs, buff + 1, mwd, cwd);
+        r= cd(cs, buff + 1, mwd);
     if (buff[0] == 3)
         r = pwd(cs);
     if (buff[0] == 4)
@@ -77,7 +81,7 @@ int wrequest(int cs)
     return (paquet_size);
 }
 
-char *garequest(int cs)
+char *garequest(int cs, int *value)
 {
     int paquet_size;
     char    *data;
@@ -86,25 +90,22 @@ char *garequest(int cs)
         return (NULL);
     if ((data = gfrequest(cs, paquet_size)) == NULL)
         return (NULL);
+    if (value)
+        *value = paquet_size;
     return (data);
 }
 
 int grequest(int cs, char *mwd)
 {
     int con;
-    char cwd[4097];
-    char *response;
     char    *data;
 
     con = 1;
-    response = getcwd(cwd, 4096);
-    if (!response)
-        return (-1);
     while (con != -1)
     {
-        if (!(data = garequest(cs)))
-            return (NULL);
-        if (list_request(cs, data, mwd, &cwd) == -1)
+        if (!(data = garequest(cs, NULL)))
+            return (-1);
+        if (list_request(cs, data, mwd) == -1)
             ft_putendl("Error happened");
         free(data);
     }

@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 22:33:40 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/24 17:37:56 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/25 00:07:45 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,27 @@ int     send_filename(char *filename, int cs)
 
     buff[0] = 4;
     ft_strcpy(buff + 1, filename);
-    if (screquest(buff, cs) == -1)
+    if (screquest(buff, cs, -1) == -1)
         return (-1);
     return (0);
 }
 
 int     send_file(int fd, int cs)
 {
-    char    buff[4097];
+    char    buff[32000];
     int     r;
 
-    buff[0] = 5;
-    while ((r = read(fd, &buff[1], 4095)))
+    buff[0] = 6;
+    while ((r = read(fd, buff + 1, 31998)))
     {
-        buff[r] = '\0';
-        if (r < 4096)
-            buff[0] = 6;
-        if (screquest(buff, cs))
+        if (r < 31998)
+            buff[0] = 7;
+        if (screquest(buff, cs, r + 1))
             return (-1);
     }
     return (0);
 }
+
 
 /*
     Function used to upload a file

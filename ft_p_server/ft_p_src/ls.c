@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 18:08:58 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/24 16:32:10 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/24 22:36:41 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int ls(int cs)
     if (!string)
         return (-1);
     function_on_chained_list(&first, concat, &string);
-    screquest(cs, save);
+    screquest(cs, save, -1);
     free(save);
     delete_chained_list(&first, free);
     return (1);

@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 12:02:29 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/24 16:32:32 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/24 22:17:27 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,6 @@ void send_response(char buff[1024], int cs)
     if (write(cs, "cava", 4) == -1)
         exit_error(3);
 }
-
-
-
 
 int     get_connections(int sock, char *mwd)
 {
