@@ -6,18 +6,67 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 19:51:47 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/24 00:50:11 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/24 14:46:13 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_p.h"
+
+char *gfrequest(int cs, int paquet_size)
+{
+    char    *data;
+    char    *tmp;
+    int     r;
+
+    if (!(data = malloc(paquet_size + 1)))
+        return (NULL);
+    data[paquet_size] = '\0';
+    tmp = data;
+    while (paquet_size > 0)
+    {
+        r = read(cs, tmp, paquet_size);
+        if (r <= 0)
+            return (NULL);
+        tmp += r;
+        paquet_size -= r;
+    }
+    ft_putendl(data);
+    return (data);
+}
+
+int wrequest(int cs)
+{
+    char buff[4];
+    int r;
+    int paquet_size;
+
+    r = read(cs, buff, 4);
+    if (r < 4)
+        return (-1);
+    paquet_size = *(int*)buff;
+    paquet_size -= 4;
+    ft_printf("yolo %d\n", paquet_size);
+    return (paquet_size);
+}
+
+char *garequest(int cs)
+{
+    int paquet_size;
+    char    *data;
+
+    if ((paquet_size = wrequest(cs)) == -1)
+        return (NULL);
+    if ((data = gfrequest(cs, paquet_size)) == NULL)
+        return (NULL);
+    return (data);
+}
 
 /*
     Function used for basic request like cd, ls and pwd
 */
 int    sbrequest(char value, int cs)
 {
-    char    buff[4097];
+    char    *response;
     int     r;
     int size;
 
@@ -26,12 +75,11 @@ int    sbrequest(char value, int cs)
         exit_error(4);
     if (write(cs, &value, 1) == -1)
         exit_error(4);
-    if ((r = read(cs, buff, 4096)) == -1)
+    if (!(response = garequest(cs)))
     {
         return (-1);
     }
-    buff[r] = '\0';
-    ft_putstr(buff);
+    ft_putstr(response);
     ft_putstr("\n");
     return (0);
 }
@@ -74,8 +122,8 @@ int     request(char *request, int cs)
         cd(request, cs);
     else if (ft_strcmp(request, "pwd") == 0)
         sbrequest(3, cs);
-    // else if (ft_strncmp(request, "get", 3) == 0)
-    //     download();
+    else if (ft_strncmp(request, "get", 3) == 0)
+        download(request, cs);
     else if (ft_strncmp(request, "put", 3) == 0)
         upload(request, cs);
     else

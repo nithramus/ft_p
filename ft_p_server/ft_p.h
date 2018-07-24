@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 12:21:11 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/24 01:19:16 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/24 14:42:49 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int grequest(int cs, char *mwd);
 int screquest(int cs, char *response);
 int pwd(int cs);
 int ls(int cs);
-int upload(int cs, char *buff);
 char *garequest(int cs);
+int upload(int cs, char *buff);
+int    download(int cs, char *filename);
 #endif

@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "ft_p.h": "c"
+        "ft_p.h": "c",
+        "stat.h": "c"
     }
 }

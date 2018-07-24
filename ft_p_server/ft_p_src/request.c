@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 16:41:20 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/24 01:26:06 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/24 14:45:25 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 int screquest(int cs, char *response)
 {
+    int value;
+
+    value = ft_strlen(response) + 4;
+    if (write(cs, &value, 4) == -1)
+        exit_error(4);
     if (write(cs, response, ft_strlen(response)) == -1)
         return (-1);
     return (0);
@@ -33,9 +38,9 @@ int list_request(int cs, char *buff, char *mwd, char **cwd)
     if (buff[0] == 3)
         r = pwd(cs);
     if (buff[0] == 4)
-        upload(cs, buff);
-    // if (buff[0] == 5)
-    // if (buff[0] == 6)
+        r = upload(cs, buff);
+    if (buff[0] == 5)
+        r = download(cs, buff);
     return (r);
 }
 

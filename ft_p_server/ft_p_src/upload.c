@@ -5,41 +5,50 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/21 14:56:17 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/24 01:26:57 by nithramir        ###   ########.fr       */
+/*   Created: 2018/07/24 12:31:56 by nithramir         #+#    #+#             */
+/*   Updated: 2018/07/24 15:25:47 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_p.h"
 
-int receivef(int cs, int fd)
+int     send_file(int fd, int cs)
 {
-    char *data;
+    char    buff[4097];
+    int     r;
 
-    if (!(data = garequest(cs)))
-        return (0);
-    if (write(fd, data + 1, ft_strlen(data)) == -1)
-        return (-1);
-    if (data[0] == 5)
-        return (1);
-    else
-        return (0);
+    buff[0] = 6;
+    while ((r = read(fd, buff + 1, 4095)))
+    {
+        buff[r] = '\0';
+        ft_putendl(buff);
+        if (r < 4095)
+            buff[0] = 7;
+        if (screquest(cs, buff))
+            return (-1);
+    }
+    return (0);
 }
 
-
-int upload(int cs, char *buff)
+/*
+    Function used to download a file
+*/
+int    download(int cs, char *request)
 {
-    int contin;
-    int fd;
+    int     fd;
 
-    contin = 1;
-    ft_putendl("coucou");
-    ft_putendl(buff);
-    fd = open(buff + 1, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
-    while (contin)
+    ft_putendl(request + 1);
+    fd = open(request + 1, O_RDONLY);
+    if (fd == -1)
     {
-        ft_putendl("coucou2");
-        contin = receivef(cs, fd);
+        ft_putendl("Unable to open file");
+        return (-1);
+    }
+    ft_putendl("sending file");
+    if (send_file(fd, cs) == -1)
+    {
+        ft_putendl("connection error2");
+        return (-1);
     }
     close(fd);
     return (0);

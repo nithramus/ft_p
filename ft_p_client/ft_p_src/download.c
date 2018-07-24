@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 12:01:54 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/20 13:13:57 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/24 15:28:08 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int request_file(char *filename, int cs)
 {
     char buff[1096];
 
-    buff[0] = 7;
+    buff[0] = 5;
     ft_strcpy(buff + 1, filename);
     if (screquest(buff, cs) == -1)
         return (-1);
@@ -27,7 +27,7 @@ int create_file(char *filename)
 {
     int fd;
 
-    if ((fd = open(filename, O_WRONLY || O_CREAT)) == -1)
+    if ((fd = open(filename, O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR)) == -1)
     {
         ft_putendl("Failed creating file");
         return (-1);
@@ -37,7 +37,7 @@ int create_file(char *filename)
 
 int receive_file(char *filename, int cs)
 {
-    char buff[32000];
+    char *data;
     int con;
     int fd;
 
@@ -46,23 +46,27 @@ int receive_file(char *filename, int cs)
         return (-1);
     while (con)
     {
-        con = read(cs, buff, 31999);
-        if (con)
+        data = garequest(cs);
+        ft_putendl(data);
+        if (data)
         {
-            buff[con] = '\0';
-            if (buff[0] != 5)
+            if (data[0] != 6)
                 con = 0;
-            ft_putendl(buff);
+            ft_putendl(data);
         }
+        else
+            return (-1);
     }
-    close_file(fd);
+    close(fd);
+    return (0);
 }
 
-int download(char * request, int cs)
+int download(char *request, int cs)
 {
     char    *filename;
 
     filename = get_filename(request);
+    ft_putendl(request);
     if (!filename)
     {
         ft_putendl("No filename");
@@ -73,5 +77,12 @@ int download(char * request, int cs)
         ft_putendl("error getting file");
         return (-1);
     }
+    if (receive_file(filename, cs) == -1)
+    {
+        ft_putendl("sould delete the file");
+        return (-1);
+    }
+    ft_putendl("finished");
+    return (0);
 
 }

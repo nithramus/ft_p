@@ -6,7 +6,7 @@
 #    By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/18 12:13:38 by nithramir         #+#    #+#              #
-#    Updated: 2018/07/21 15:19:27 by nithramir        ###   ########.fr        #
+#    Updated: 2018/07/24 12:32:08 by nithramir        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRC = main_server.o\
 	  ls.o\
 	  cd.o\
 	  upload.o\
+	  download.o\
 
 CC = gcc -g -I. -fsanitize=address
 
