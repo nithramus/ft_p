@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 22:33:40 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/25 00:07:45 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/25 01:17:52 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int    upload(char *request, int cs)
         ft_putendl("connection error2");
         return (-1);
     }
+    free(filename);
     close(fd);
     return (0);
 }

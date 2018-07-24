@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 19:51:47 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/25 00:06:43 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/25 01:10:50 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,27 +66,6 @@ char *garequest(int cs, int *size)
 }
 
 /*
-    Function used for basic request like cd, ls and pwd
-*/
-int    sbrequest(char value, int cs)
-{
-    char    *response;
-    int     r;
-    int size;
-
-    size = 5;
-    if (write(cs, &size, 4) == -1)
-        exit_error(4);
-    if (write(cs, &value, 1) == -1)
-        exit_error(4);
-    if (!(response = garequest(cs, NULL)))
-        return (-1);
-    ft_putstr(response + 1);
-    ft_putstr("\n");
-    return (0);
-}
-
-/*
     Function used for complexe request like get and put
 */
 int screquest(char *response, int cs, int size)
@@ -111,20 +90,20 @@ int     request(char *request, int cs)
 
     r = 1;
     if (ft_strcmp(request, "ls") == 0)
-        r = sbrequest(1, cs);
+        r = ls(cs);
     else if (ft_strncmp(request, "cd", 2) == 0)
         r = cd(request, cs);
     else if (ft_strcmp(request, "pwd") == 0)
-        r = sbrequest(3, cs);
+        r = pwd(cs);
     else if (ft_strncmp(request, "get", 3) == 0)
         r = download(request, cs);
     else if (ft_strncmp(request, "put", 3) == 0)
         r = upload(request, cs);
     else
-        ft_putendl("No such command");
+        ft_putendl("\nNo such command");
     if (r == 0)
-        ft_putendl("SUCCESS");
+        ft_putendl("\nSUCCESS");
     if (r == -1)
-        ft_putendl("ERROR");
+        ft_putendl("\nERROR");
     return (r);
 }

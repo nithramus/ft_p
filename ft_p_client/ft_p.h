@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 12:21:11 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/25 00:07:13 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/25 01:08:52 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,8 @@ char    *get_filename(char *request);
 int     cd(char *request, int cs);
 char *garequest(int cs, int *size);
 int download(char *request, int cs);
+int ls(int cs);
+int pwd(int cs);
+int screquest(char *response, int cs, int size);
 
 #endif

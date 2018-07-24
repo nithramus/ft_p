@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/21 14:56:17 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/24 23:38:59 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/25 01:20:14 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,18 @@ int receivef(int cs, int fd)
 {
     char *data;
     int size;
+    int ret;
 
     if (!(data = garequest(cs, &size)))
         return (0);
     if (write(fd, data + 1, size - 1) == -1)
         return (-1);
     if (data[0] == 6)
-        return (1);
+        ret = 1;
     else
-        return (0);
+        ret = 0;
+    free(data);
+    return (ret);
 }
 
 

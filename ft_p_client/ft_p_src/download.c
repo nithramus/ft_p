@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 12:01:54 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/25 00:05:15 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/25 01:00:48 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,4 @@ int download(char *request, int cs)
         return (-1);
     }
     return (0);
-
 }

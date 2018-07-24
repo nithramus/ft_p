@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 16:41:20 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/24 23:48:05 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/25 01:13:56 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ char *gfrequest(int cs, int paquet_size)
     {
         r = read(cs, tmp, paquet_size);
         if (r <= 0)
+        {
+            free(data);
             return (NULL);
+        }
         tmp += r;
         paquet_size -= r;
     }

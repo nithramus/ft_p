@@ -6,7 +6,7 @@
 #    By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/18 12:13:38 by nithramir         #+#    #+#              #
-#    Updated: 2018/07/24 12:25:26 by nithramir        ###   ########.fr        #
+#    Updated: 2018/07/25 01:12:39 by nithramir        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,10 +26,12 @@ SRC = main_client.o\
 	  get_filename.o\
 	  cd.o\
 	  download.o\
+	  ls.o\
+	  pwd.o\
 
 CC = gcc -g -I.
 
-FLAG = -Wall -Wextra -O #-Werror
+FLAG = -Wall -Wextra -O -fsanitize=address #-Werror
 
 LIB = libft/libftprintf.a libft_chained_list/libft_chained_list.a
 

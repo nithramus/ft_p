@@ -9,12 +9,16 @@ int create_client(char *addr, int port)
     proto = getprotobyname("tcp");
     sock = socket(AF_INET, SOCK_STREAM, proto->p_proto);
     if (sock == -1)
+    {
+        ft_putendl("exit");
         exit_error(2);
+    }
     sin.sin_family = AF_INET;
     sin.sin_port = htons(port);
     sin.sin_addr.s_addr = inet_addr(addr);
     if (connect(sock, (struct sockaddr*)&sin, sizeof(sin)) == -1)
     {
+        ft_putendl("connect problem");
         exit_error(3);
     }
     // listen(sock, 42);

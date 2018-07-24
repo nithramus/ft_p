@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 12:31:56 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/24 23:51:14 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/25 01:11:57 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int    download(int cs, char *request)
 {
     int     fd;
 
-    ft_putendl(request + 1);
     if (ft_strchr(request, '/'))
     {
         ft_putendl("invalid caractere");
@@ -47,7 +46,6 @@ int    download(int cs, char *request)
         ft_putendl("Unable to open file");
         return (-1);
     }
-    ft_putendl("sending file");
     if (send_file(fd, cs) == -1)
     {
         ft_putendl("connection error2");
