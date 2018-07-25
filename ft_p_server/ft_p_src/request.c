@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 16:41:20 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/25 22:07:14 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/25 22:22:58 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ char *gfrequest(int cs, int paquet_size)
     int     r;
 
     if (!(data = malloc(paquet_size + 1)))
-        return (semessage(cs, "Malloc allocation failed"));
+    {
+        semessage(cs, "Malloc allocation failed");
+        return (NULL);
+    }
     data[paquet_size] = '\0';
     tmp = data;
     while (paquet_size > 0)

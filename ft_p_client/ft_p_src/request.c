@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 19:51:47 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/25 01:10:50 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/26 01:35:49 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,11 @@ char *garequest(int cs, int *size)
         return (NULL);
     if (size)
         *size = paquet_size;
+    if (data[0] == 51)
+    {
+        ft_putendl(data + 1);
+        return (NULL);
+    }
     return (data);
 }
 

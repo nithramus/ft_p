@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 12:02:29 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/25 18:56:31 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/25 22:21:56 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,6 @@ int create_server(int port)
     bind(sock, (struct sockaddr*)&sin, sizeof(sin));
     listen(sock, 42);
     return (sock);
-}
-
-void send_response(char buff[1024], int cs)
-{
-    if (write(cs, "cava", 4) == -1)
-        exit_error(3);
 }
 
 int     get_connections(int sock, char *mwd)

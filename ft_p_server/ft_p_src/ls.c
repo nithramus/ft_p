@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 18:08:58 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/25 21:57:54 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/26 01:41:44 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int list_files(int cs, t_libft_chained_list    **first)
                 return (semessage(cs, "Malloc allocation failed"));
     }
     else
-        return (semessage(cs, "Malloc allocation failed"));
+        return (semessage(cs, "Can open dir"));
     closedir(d);
     return (0);
 }
@@ -73,12 +73,11 @@ int ls(int cs)
     size = 0;
     if (list_files(cs, &first) == -1)
         return (-1);
-
     function_on_chained_list(&first, count, &size);
     string = malloc(size + 2);
     save = string;
-    if (!string)
-        return (semessage(cs, "Malloc allocation failed"));
+    if (!string || size == 0)
+        return (semessage(cs, "Internal error"));
     string[0] = 1;
     string += 1;
     function_on_chained_list(&first, concat, &string);

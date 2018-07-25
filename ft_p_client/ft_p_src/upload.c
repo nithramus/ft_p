@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 22:33:40 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/25 01:17:52 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/26 01:30:25 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int     send_filename(char *filename, int cs)
     buff[0] = 4;
     ft_strcpy(buff + 1, filename);
     if (screquest(buff, cs, -1) == -1)
+        return (-1);
+    if (!(garequest(cs, NULL)))
         return (-1);
     return (0);
 }
@@ -51,7 +53,7 @@ int    upload(char *request, int cs)
     filename = get_filename(request);
     if (filename == NULL)
     {
-        ft_putendl("Problem getting filename");
+        ft_putendl("No filename");
         return -1;
     }
     fd = open(filename, O_RDONLY);

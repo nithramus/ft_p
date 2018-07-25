@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 12:01:54 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/25 01:00:48 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/26 01:28:57 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int request_file(char *filename, int cs)
     buff[0] = 5;
     ft_strcpy(buff + 1, filename);
     if (screquest(buff, cs, -1) == -1)
+        return (-1);
+    if (!(garequest(cs, NULL)))
         return (-1);
     return (1);
 }
@@ -74,14 +76,8 @@ int download(char *request, int cs)
         return (-1);
     }
     if (request_file(filename, cs) == -1)
-    {
-        ft_putendl("error getting file");
         return (-1);
-    }
     if (receive_file(filename, cs) == -1)
-    {
-        ft_putendl("sould delete the file");
         return (-1);
-    }
     return (0);
 }

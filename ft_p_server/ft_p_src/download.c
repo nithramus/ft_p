@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 12:31:56 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/25 22:15:10 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/26 01:23:42 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int    download(int cs, char *request)
         ft_putendl("Unable to open file");
         return semessage(cs, "Unable to open file, sure of the name ?");;
     }
+    if (svmessage(cs) == -1)
+        return (-1);
     if (send_file(fd, cs) == -1)
     {
         ft_putendl("Error while sending file");
