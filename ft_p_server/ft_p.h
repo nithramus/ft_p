@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 12:21:11 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/24 22:35:28 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/25 22:04:48 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,7 @@ int ls(int cs);
 char *garequest(int cs, int *size);
 int upload(int cs, char *buff);
 int    download(int cs, char *filename);
+int semessage(int cs, char *string);
+int svmessage(int cs);
+
 #endif

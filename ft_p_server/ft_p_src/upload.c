@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/21 14:56:17 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/25 01:20:14 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/25 19:08:17 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int receivef(int cs, int fd)
     int ret;
 
     if (!(data = garequest(cs, &size)))
-        return (0);
-    if (write(fd, data + 1, size - 1) == -1)
         return (-1);
+    if (write(fd, data + 1, size - 1) == -1)
+        return semessage();
     if (data[0] == 6)
         ret = 1;
     else
@@ -40,9 +40,11 @@ int upload(int cs, char *buff)
     if (ft_strchr(buff + 1, '/'))
     {
         ft_putendl("invalid caractere");
-        return (-1);
+        return semessage();
     }
     fd = open(buff + 1, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+    if (fd == -1)
+        return semessage();
     while (contin)
         contin = receivef(cs, fd);
     close(fd);

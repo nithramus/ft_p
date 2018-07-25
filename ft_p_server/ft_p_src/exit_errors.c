@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 16:25:50 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/20 16:47:49 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/25 22:03:33 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,9 @@ void exit_error(int err)
         ft_putendl("Failed to write");
     if (err == 4)
         ft_putendl("Failed to get current working directory");
+    if (err == 5)
+        ft_putendl("Error while moving of directory");
+    if (err == 6)
+        ft_putendl("Failed to read");
     exit(1);
 }

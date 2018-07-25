@@ -6,13 +6,11 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 12:02:29 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/24 22:17:27 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/25 18:56:31 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_p.h"
-
-
 
 int create_server(int port)
 {

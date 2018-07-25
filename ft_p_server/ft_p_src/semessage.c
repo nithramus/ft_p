@@ -1,31 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   semessage.C                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/20 17:30:45 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/25 21:58:56 by nithramir        ###   ########.fr       */
+/*   Created: 2018/07/25 19:20:01 by nithramir         #+#    #+#             */
+/*   Updated: 2018/07/25 21:49:32 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_p.h"
 
-int pwd(int cs)
+int svmessage(int cs)
 {
-    char    buff[4097];
-    char    *response;
+    char buff[4];
 
-    response = getcwd(buff + 1, 4096);
-    if (!response)
-    {
-        ft_putendl("error getting path");
-        return semessage(cs, "Unable to get current path");
-    }
-    else
-        buff[0] = 3;
-    if (screquest(cs, buff, -1) == -1)
+    buff[0] = 42;
+    ft_strcpy(buff + 1, "ok");
+    if (screquest(cs, buff, NULL) == -1)
         return (-1);
     return (0);
+}
+
+int semessage(int cs, char *string)
+{
+    char *msg;
+
+    if (!(msg = malloc(ft_strlen(string + 2))))
+        return (-1);
+    msg[0] = 51;
+    ft_strcpy(msg + 1, string);
+    if (screquest(cs, msg, NULL) == -1)
+    {
+        free(msg);
+        return (-1);
+    }
+    free(msg);
+    return (-1);
 }

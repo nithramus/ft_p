@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 23:53:11 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/24 23:39:12 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/25 21:51:18 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,12 @@ int cd(int cs, char *path, char *mwd)
     chdir(path);
     response = getcwd(buff, 4096);
     if (!response)
-        return (-1);
+        return semessage(cs, "Unable to get current path");
     if (valid_path(mwd, response) == -1)
     {
-        chdir(mwd);
-        return (0);
+        if (chdir(mwd) == -1)
+            exit_error(5);
+        return semessage(cs, "Path not valid");;
     }
-    return (0);
+    return (svmessage(cs));
 }

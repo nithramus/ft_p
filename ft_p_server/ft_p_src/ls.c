@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 18:08:58 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/25 01:10:11 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/25 21:57:54 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int cresponse(struct dirent *dir, t_libft_chained_list **first)
     return (0);
 }
 
-int list_files(t_libft_chained_list    **first)
+int list_files(int cs, t_libft_chained_list    **first)
 {
     DIR *d;
     struct dirent *dir;
@@ -53,8 +53,11 @@ int list_files(t_libft_chained_list    **first)
     if (d)
     {
         while ((dir = readdir(d)) != NULL)
-            cresponse(dir, first);
+            if (cresponse(dir, first) == -1)
+                return (semessage(cs, "Malloc allocation failed"));
     }
+    else
+        return (semessage(cs, "Malloc allocation failed"));
     closedir(d);
     return (0);
 }
@@ -68,12 +71,14 @@ int ls(int cs)
 
     first = NULL;
     size = 0;
-    list_files(&first);
+    if (list_files(cs, &first) == -1)
+        return (-1);
+
     function_on_chained_list(&first, count, &size);
     string = malloc(size + 2);
     save = string;
     if (!string)
-        return (-1);
+        return (semessage(cs, "Malloc allocation failed"));
     string[0] = 1;
     string += 1;
     function_on_chained_list(&first, concat, &string);
