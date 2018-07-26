@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 12:02:29 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/25 22:21:56 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/26 12:24:16 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ int     get_connections(int sock, char *mwd)
     pid = fork();
     if (pid == 0)
     {
+        ft_putendl("new client");
         grequest(cs, mwd);
         close(cs);
+        ft_putendl("closing socket");
         exit(0);
     }
     return (1);

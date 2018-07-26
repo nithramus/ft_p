@@ -63,10 +63,7 @@ int    upload(char *request, int cs)
         return (-1);
     }
     if (send_filename(filename, cs) == -1)
-    {
-        ft_putendl("connection error1");
         return (-1);
-    }
     if (send_file(fd, cs) == -1)
     {
         ft_putendl("connection error2");

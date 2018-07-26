@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 12:21:11 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/25 01:08:52 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/26 12:18:23 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ int download(char *request, int cs);
 int ls(int cs);
 int pwd(int cs);
 int screquest(char *response, int cs, int size);
+int    sbrequest_nr(char value, int cs);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 19:51:47 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/26 01:35:49 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/26 12:19:50 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ int     request(char *request, int cs)
         r = download(request, cs);
     else if (ft_strncmp(request, "put", 3) == 0)
         r = upload(request, cs);
+    else if (ft_strcmp(request, "exit") == 0)
+        r = exitr(8, cs);
     else
         ft_putendl("\nNo such command");
     if (r == 0)

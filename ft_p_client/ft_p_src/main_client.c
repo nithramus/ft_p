@@ -30,7 +30,9 @@ int main(int argc, char **argv)
     int     sock;
     char    command[4096];
     int r;
+    int con;
 
+    con = 0;
     if (argc < 3)
         exit_error(1);
     sock = create_client(argv[1], atoi(argv[2]));
@@ -39,7 +41,12 @@ int main(int argc, char **argv)
     while ((r = read(0, command, 4095)) != 0)
     {
         command[r - 1] = '\0';
-        request(command, sock);
+        con = request(command, sock);
+        if (con == -2)
+        {
+            close(sock);
+            return (0);
+        }
         ft_putstr("$> ");
     }
     close(sock);

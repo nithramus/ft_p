@@ -6,7 +6,7 @@
 /*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 01:05:51 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/26 00:50:49 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/07/26 12:20:06 by nithramir        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,20 @@ int    sbrequest(char value, int cs)
         return (-1);
     ft_putstr(response + 1);
     return (0);
+}
+
+int    exitr(char value, int cs)
+{
+    char    *response;
+    int     r;
+    int size;
+
+    size = 5;
+    if (write(cs, &size, 4) == -1)
+        return (-2);
+    if (write(cs, &value, 1) == -1)
+        return (-2);
+    return (-2);
 }
 
 int ls(int cs)
