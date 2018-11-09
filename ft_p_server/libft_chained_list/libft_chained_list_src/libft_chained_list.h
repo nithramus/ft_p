@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_chained_list.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 19:14:01 by bandre            #+#    #+#             */
-/*   Updated: 2018/07/20 22:47:39 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/11/09 20:17:46 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void							remove_maillon(
 	t_libft_chained_list *maillon,
 	void (*delete_data)(void*));
 
-void	swap_maillon(
+void							swap_maillon(
 	t_libft_chained_list **first,
 	int (*function)(void*, void*));
 

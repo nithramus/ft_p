@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+         #
+#    By: bandre <bandre@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/18 12:13:38 by nithramir         #+#    #+#              #
-#    Updated: 2018/07/25 19:20:19 by nithramir        ###   ########.fr        #
+#    Updated: 2018/11/09 17:44:05 by bandre           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ft_p_server
+NAME = server
 
 SRC_PATH = ft_p_src
 
@@ -43,7 +43,7 @@ $(NAME): $(SRC_O)
 	$(CC) $(FLAG) -o $(NAME) $(SRC_O) $(LIB)
 
 $(OBJ_PATH)/%.o:$(SRC_PATH)/%.c
-	$(CC) -c $< -o $@ $(FLAG)
+	$(CC) $(FLAG) -c $< -o $@ $(FLAG)
 
 EXEC:
 	make -C libft/

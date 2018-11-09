@@ -3,58 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   download.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 12:31:56 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/26 01:23:42 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/11/09 20:09:52 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_p.h"
+#include "../ft_p.h"
 
-int     send_file(int fd, int cs)
+int	send_file(int fd, int cs)
 {
-    char    buff[32000];
-    int     r;
+	char	buff[32000];
+	int		r;
 
-    buff[0] = 6;
-    while ((r = read(fd, buff + 1, 31998)))
-    {
-        if (r < 31998)
-            buff[0] = 7;
-        if (screquest(cs, buff, r + 1) == -1)
-            return (-1);
-    }
-    if (r == -1)
-        return semessage(cs, "Error while reading in file");
-    return (0);
+	buff[0] = 6;
+	while ((r = read(fd, buff + 1, 31998)))
+	{
+		if (r < 31998)
+			buff[0] = 7;
+		if (screquest(cs, buff, r + 1) == -1)
+			return (-1);
+	}
+	if (r == -1)
+		return (semessage(cs, "Error while reading in file"));
+	return (0);
 }
 
-/*
-    Function used to download a file
-*/
-int    download(int cs, char *request)
+int	download(int cs, char *request)
 {
-    int     fd;
+	int	fd;
 
-    if (ft_strchr(request, '/'))
-    {
-        ft_putendl("invalid caractere");
-        return semessage(cs, "No / accepted in file name");;
-    }
-    fd = open(request + 1, O_RDONLY);
-    if (fd == -1)
-    {
-        ft_putendl("Unable to open file");
-        return semessage(cs, "Unable to open file, sure of the name ?");;
-    }
-    if (svmessage(cs) == -1)
-        return (-1);
-    if (send_file(fd, cs) == -1)
-    {
-        ft_putendl("Error while sending file");
-        return (-1);
-    }
-    close(fd);
-    return (0);
+	if (ft_strchr(request, '/'))
+	{
+		ft_putendl("invalid caractere");
+		return (semessage(cs, "No / accepted in file name"));
+	}
+	fd = open(request + 1, O_RDONLY);
+	if (fd == -1)
+	{
+		ft_putendl("Unable to open file");
+		return (semessage(cs, "Unable to open file, sure of the name ?"));
+	}
+	if (svmessage(cs) == -1)
+		return (-1);
+	if (send_file(fd, cs) == -1)
+	{
+		ft_putendl("Error while sending file");
+		return (-1);
+	}
+	close(fd);
+	return (0);
 }

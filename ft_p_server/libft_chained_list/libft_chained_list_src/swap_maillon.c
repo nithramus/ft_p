@@ -6,15 +6,15 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 11:22:56 by bandre            #+#    #+#             */
-/*   Updated: 2018/05/09 11:32:04 by bandre           ###   ########.fr       */
+/*   Updated: 2018/11/09 20:18:39 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_chained_list.h"
 
-void swap(t_libft_chained_list *dest, t_libft_chained_list *src)
+void	swap(t_libft_chained_list *dest, t_libft_chained_list *src)
 {
-	void *tmp;
+	void	*tmp;
 
 	tmp = dest->data;
 	dest->data = src->data;
@@ -24,8 +24,8 @@ void swap(t_libft_chained_list *dest, t_libft_chained_list *src)
 void	swap_maillon(t_libft_chained_list **first,
 	int (*function)(void*, void*))
 {
-	t_libft_chained_list *tmp;
-	int retour;
+	t_libft_chained_list	*tmp;
+	int						retour;
 
 	retour = 0;
 	tmp = *first;
