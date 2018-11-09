@@ -3,53 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   ls.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 01:05:51 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/26 12:20:06 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/11/09 21:19:04 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_p.h"
+#include "../ft_p.h"
 
-/*
-    Function used for basic request like cd, ls and pwd
-*/
-int    sbrequest(char value, int cs)
+int	sbrequest(char value, int cs)
 {
-    char    *response;
-    int     r;
-    int size;
+	char	*response;
+	int		r;
+	int		size;
 
-    size = 5;
-    if (write(cs, &size, 4) == -1)
-        return (-1);
-    if (write(cs, &value, 1) == -1)
-        return (-1);
-    if (!(response = garequest(cs, NULL)))
-        return (-1);
-    ft_putstr(response + 1);
-    return (0);
+	size = 5;
+	if (write(cs, &size, 4) == -1)
+		return (-1);
+	if (write(cs, &value, 1) == -1)
+		return (-1);
+	if (!(response = garequest(cs, NULL)))
+		return (-1);
+	ft_putstr(response + 1);
+	return (0);
 }
 
-int    exitr(char value, int cs)
+int	exitr(char value, int cs)
 {
-    char    *response;
-    int     r;
-    int size;
+	char	*response;
+	int		r;
+	int		size;
 
-    size = 5;
-    if (write(cs, &size, 4) == -1)
-        return (-2);
-    if (write(cs, &value, 1) == -1)
-        return (-2);
-    return (-2);
+	size = 5;
+	if (write(cs, &size, 4) == -1)
+		return (-2);
+	if (write(cs, &value, 1) == -1)
+		return (-2);
+	return (-2);
 }
 
-int ls(int cs)
+int	ls(int cs)
 {
-    int ret;
+	int	ret;
 
-    ret = sbrequest(1, cs);
-    return (ret);
+	ret = sbrequest(1, cs);
+	return (ret);
 }

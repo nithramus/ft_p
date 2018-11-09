@@ -6,7 +6,7 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 19:14:01 by bandre            #+#    #+#             */
-/*   Updated: 2018/05/24 15:02:34 by bandre           ###   ########.fr       */
+/*   Updated: 2018/11/09 21:31:46 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void							remove_maillon(
 	t_libft_chained_list *maillon,
 	void (*delete_data)(void*));
 
-void	swap_maillon(
+void							swap_maillon(
 	t_libft_chained_list **first,
 	int (*function)(void*, void*));
 

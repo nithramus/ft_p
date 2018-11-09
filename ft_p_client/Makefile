@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ft_p_client
+NAME = client
 
 SRC_PATH = ft_p_src
 
@@ -44,7 +44,7 @@ $(NAME): $(SRC_O)
 	$(CC) $(FLAG) -o $(NAME) $(SRC_O) $(LIB)
 
 $(OBJ_PATH)/%.o:$(SRC_PATH)/%.c
-	$(CC) -c $< -o $@ $(FLAG)
+	$(CC) $(FLAG) -c $< -o $@ $(FLAG)
 
 EXEC:
 	make -C libft/

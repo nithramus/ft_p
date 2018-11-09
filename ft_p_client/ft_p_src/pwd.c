@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 01:07:22 by nithramir         #+#    #+#             */
-/*   Updated: 2018/07/26 01:33:30 by nithramir        ###   ########.fr       */
+/*   Updated: 2018/11/09 21:19:28 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_p.h"
+#include "../ft_p.h"
 
-int pwd(int cs)
+int	pwd(int cs)
 {
-    int ret;
+	int	ret;
 
-    ret = sbrequest(3, cs);
-    ft_putstr("\n");
-    return (ret);
+	ret = sbrequest(3, cs);
+	ft_putstr("\n");
+	return (ret);
 }
