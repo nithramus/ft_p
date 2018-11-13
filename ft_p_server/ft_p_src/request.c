@@ -6,7 +6,7 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 16:41:20 by nithramir         #+#    #+#             */
-/*   Updated: 2018/11/09 20:02:13 by bandre           ###   ########.fr       */
+/*   Updated: 2018/11/13 18:49:59 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int		list_request(int cs, char *buff, char *mwd)
 	int	r;
 
 	r = 0;
+	ft_printf("request number %d\n", (int)buff[0]);
 	if (buff[0] == 1)
 		r = ls(cs);
 	if (buff[0] == 2)
@@ -122,6 +123,7 @@ int		grequest(int cs, char *mwd)
 			ft_putendl("Error happened");
 		else if (r == -2)
 			return (-1);
+		ft_putendl("End of request");
 	}
 	return (0);
 }

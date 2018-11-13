@@ -6,7 +6,7 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/21 14:56:17 by nithramir         #+#    #+#             */
-/*   Updated: 2018/11/09 21:30:23 by bandre           ###   ########.fr       */
+/*   Updated: 2018/11/13 18:55:36 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	receivef(int cs, int fd)
 		ret = 1;
 	else
 		ret = 0;
+	ft_printf("receivef data number %d\n", (int)data[0]);
 	free(data);
 	return (ret);
 }
@@ -51,5 +52,5 @@ int	upload(int cs, char *buff)
 	close(fd);
 	if (contin == -1)
 		return (-1);
-	return (svmessage(cs));
+	return (1);
 }

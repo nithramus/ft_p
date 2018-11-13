@@ -6,7 +6,7 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 22:33:40 by nithramir         #+#    #+#             */
-/*   Updated: 2018/11/09 21:21:13 by bandre           ###   ########.fr       */
+/*   Updated: 2018/11/13 18:46:08 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,16 @@ int	send_file(int fd, int cs)
 	int		r;
 
 	buff[0] = 6;
-	while ((r = read(fd, buff + 1, 31998)))
+	while ((r = read(fd, buff + 1, 31998)) > 0)
 	{
-		if (r < 31998)
-			buff[0] = 7;
+		ft_printf("inside read r value  %d\n", r);
 		if (screquest(buff, cs, r + 1))
 			return (-1);
 	}
+	buff[0] = 7;
+	ft_printf("r value  %d\n", r);
+	if (r == 0)
+		screquest(buff, cs, 1);
 	return (0);
 }
 
