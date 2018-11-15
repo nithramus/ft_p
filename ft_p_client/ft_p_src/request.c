@@ -6,7 +6,7 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 19:51:47 by nithramir         #+#    #+#             */
-/*   Updated: 2018/11/09 21:26:35 by bandre           ###   ########.fr       */
+/*   Updated: 2018/11/15 22:17:56 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ int		request(char *request, int cs)
 	int	r;
 
 	r = 1;
-	if (ft_strcmp(request, "ls") == 0)
-		r = ls(cs);
+	if (ft_strncmp(request, "ls", 2) == 0)
+		r = ls(request, cs);
 	else if (ft_strncmp(request, "cd", 2) == 0)
 		r = cd(request, cs);
 	else if (ft_strcmp(request, "pwd") == 0)

@@ -6,83 +6,35 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 18:08:58 by nithramir         #+#    #+#             */
-/*   Updated: 2018/11/09 20:11:28 by bandre           ###   ########.fr       */
+/*   Updated: 2018/11/15 22:25:40 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_p.h"
 
-void	count(t_libft_chained_list *elem, void *param)
+int	ls(int cs, char *params)
 {
-	int	*value;
+	int		link[2];
+	pid_t	pid;
+	char	foo[4096];
+	int		nbytes;
 
-	value = (int*)param;
-	*value += ft_strlen(elem->data) + 1;
-}
-
-void	concat(t_libft_chained_list *elem, void *param)
-{
-	char	**string;
-	int		size;
-
-	string = (char**)param;
-	ft_strcpy((*string), elem->data);
-	size = ft_strlen(elem->data);
-	(*string)[size] = '\n';
-	(*string)[size + 1] = '\0';
-	*string += size + 1;
-}
-
-int		cresponse(struct dirent *dir, t_libft_chained_list **first)
-{
-	char	*file;
-
-	file = ft_strdup(dir->d_name);
-	if (!file)
-		return (-1);
-	add_back_maillon(first, file);
-	return (0);
-}
-
-int		list_files(int cs, t_libft_chained_list **first)
-{
-	DIR				*d;
-	struct dirent	*dir;
-
-	d = opendir(".");
-	if (d)
+	nbytes = 0;
+	pipe(link);
+	pid = fork();
+	if (pid == 0)
 	{
-		while ((dir = readdir(d)) != NULL)
-			if (cresponse(dir, first) == -1)
-				return (semessage(cs, "Malloc allocation failed"));
+		dup2(link[1], STDOUT_FILENO);
+		close(link[0]);
+		close(link[1]);
+		execl("/bin/ls", "ls", ft_strsplit(params, ' ')[0], NULL);
 	}
 	else
-		return (semessage(cs, "Can open dir"));
-	closedir(d);
+	{
+		close(link[1]);
+		nbytes = read(link[0], foo, sizeof(foo));
+		wait4(pid, NULL, 0, NULL);
+	}
+	screquest(cs, foo, nbytes);
 	return (0);
-}
-
-int		ls(int cs)
-{
-	t_libft_chained_list	*first;
-	char					*string;
-	char					*save;
-	int						size;
-
-	first = NULL;
-	size = 0;
-	if (list_files(cs, &first) == -1)
-		return (-1);
-	function_on_chained_list(&first, count, &size);
-	string = malloc(size + 2);
-	save = string;
-	if (!string || size == 0)
-		return (semessage(cs, "Internal error"));
-	string[0] = 1;
-	string += 1;
-	function_on_chained_list(&first, concat, &string);
-	screquest(cs, save, -1);
-	free(save);
-	delete_chained_list(&first, free);
-	return (1);
 }

@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "ft_p.h": "c"
+        "ft_p.h": "c",
+        "fcntl.h": "c",
+        "unistd.h": "c",
+        "stdio.h": "c"
     }
 }

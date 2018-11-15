@@ -6,7 +6,7 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 12:08:05 by nithramir         #+#    #+#             */
-/*   Updated: 2018/11/09 21:23:27 by bandre           ###   ########.fr       */
+/*   Updated: 2018/11/15 22:33:38 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,25 @@ void	freechartab(char **tab)
 		free(tab[i]);
 		i++;
 	}
+}
+
+char	*get_real_filename(char *filename)
+{
+	char	**tab;
+	int		i;
+	char	*real_filename;
+
+	tab = ft_strsplit(filename, '/');
+	i = 0;
+	if (!tab)
+		return (NULL);
+	while (tab[i])
+		i++;
+	if (i < 1)
+		return (NULL);
+	real_filename = ft_strdup(tab[i - 1]);
+	freechartab(tab);
+	return (real_filename);
 }
 
 char	*get_filename(char *request)

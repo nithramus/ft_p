@@ -6,7 +6,7 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 21:23:47 by bandre            #+#    #+#             */
-/*   Updated: 2018/11/09 21:24:24 by bandre           ###   ########.fr       */
+/*   Updated: 2018/11/14 19:01:16 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	create_client(char *addr, int port)
 	}
 	sin.sin_family = AF_INET;
 	sin.sin_port = htons(port);
+	if (ft_strcmp(addr, "localhost") == 0)
+		addr = "127.0.0.1";
 	sin.sin_addr.s_addr = inet_addr(addr);
 	if (connect(sock, (struct sockaddr*)&sin, sizeof(sin)) == -1)
 	{

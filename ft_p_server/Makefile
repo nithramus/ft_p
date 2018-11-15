@@ -6,7 +6,7 @@
 #    By: bandre <bandre@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/18 12:13:38 by nithramir         #+#    #+#              #
-#    Updated: 2018/11/09 17:44:05 by bandre           ###   ########.fr        #
+#    Updated: 2018/11/15 22:32:32 by bandre           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,10 +27,11 @@ SRC = main_server.o\
 	  upload.o\
 	  download.o\
 	  semessage.o\
+	  request_manager.o\
 
 CC = gcc -g -I. -fsanitize=address
 
-FLAG = -Wall -Wextra -O # -Werror
+FLAG = -Wall -Wextra -O -Werror
 
 LIB = libft/libftprintf.a libft_chained_list/libft_chained_list.a
 

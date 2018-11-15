@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nithramir <nithramir@student.42.fr>        +#+  +:+       +#+         #
+#    By: bandre <bandre@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/18 12:13:38 by nithramir         #+#    #+#              #
-#    Updated: 2018/07/25 01:12:39 by nithramir        ###   ########.fr        #
+#    Updated: 2018/11/15 22:18:11 by bandre           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ SRC = main_client.o\
 
 CC = gcc -g -I.
 
-FLAG = -Wall -Wextra -O -fsanitize=address #-Werror
+FLAG = -Wall -Wextra -O -fsanitize=address -Werror
 
 LIB = libft/libftprintf.a libft_chained_list/libft_chained_list.a
 

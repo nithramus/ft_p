@@ -6,7 +6,7 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 22:33:40 by nithramir         #+#    #+#             */
-/*   Updated: 2018/11/13 18:46:08 by bandre           ###   ########.fr       */
+/*   Updated: 2018/11/15 22:13:45 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,12 @@
 int	send_filename(char *filename, int cs)
 {
 	char	buff[4096];
+	char	*real_filename;
 
 	buff[0] = 4;
-	ft_strcpy(buff + 1, filename);
+	if ((real_filename = get_real_filename(filename)) == NULL)
+		return (-1);
+	ft_strcpy(buff + 1, real_filename);
 	if (screquest(buff, cs, -1) == -1)
 		return (-1);
 	if (!(garequest(cs, NULL)))
@@ -33,12 +36,10 @@ int	send_file(int fd, int cs)
 	buff[0] = 6;
 	while ((r = read(fd, buff + 1, 31998)) > 0)
 	{
-		ft_printf("inside read r value  %d\n", r);
 		if (screquest(buff, cs, r + 1))
 			return (-1);
 	}
 	buff[0] = 7;
-	ft_printf("r value  %d\n", r);
 	if (r == 0)
 		screquest(buff, cs, 1);
 	return (0);

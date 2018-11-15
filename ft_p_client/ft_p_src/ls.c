@@ -6,7 +6,7 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 01:05:51 by nithramir         #+#    #+#             */
-/*   Updated: 2018/11/09 21:19:04 by bandre           ###   ########.fr       */
+/*   Updated: 2018/11/15 22:21:53 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	sbrequest(char value, int cs)
 {
 	char	*response;
-	int		r;
 	int		size;
 
 	size = 5;
@@ -31,8 +30,6 @@ int	sbrequest(char value, int cs)
 
 int	exitr(char value, int cs)
 {
-	char	*response;
-	int		r;
 	int		size;
 
 	size = 5;
@@ -43,10 +40,17 @@ int	exitr(char value, int cs)
 	return (-2);
 }
 
-int	ls(int cs)
+int	ls(char *request, int cs)
 {
-	int	ret;
+	int		ret;
+	char	*response;
 
-	ret = sbrequest(1, cs);
+	request[1] = 1;
+	ret = screquest(request + 1, cs, -1);
+	if (ret == -1)
+		return (-1);
+	if (!(response = garequest(cs, NULL)))
+		return (-1);
+	ft_putstr(response);
 	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 23:53:11 by nithramir         #+#    #+#             */
-/*   Updated: 2018/11/09 21:16:26 by bandre           ###   ########.fr       */
+/*   Updated: 2018/11/15 22:15:46 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	valid_path(char *mwd, char *path)
 int	cd(int cs, char *path, char *mwd)
 {
 	char	buff[4097];
-	int		size;
 	char	*response;
 
 	if (chdir(path) == -1)

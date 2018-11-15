@@ -6,7 +6,7 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 12:21:11 by nithramir         #+#    #+#             */
-/*   Updated: 2018/11/09 21:32:56 by bandre           ###   ########.fr       */
+/*   Updated: 2018/11/15 22:21:06 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@ char	*get_filename(char *request);
 int		cd(char *request, int cs);
 char	*garequest(int cs, int *size);
 int		download(char *request, int cs);
-int		ls(int cs);
+int		ls(char *request, int cs);
 int		pwd(int cs);
 int		screquest(char *response, int cs, int size);
 int		sbrequest_nr(char value, int cs);
-
+char	*get_real_filename(char *filename);
+int		exitr(char value, int cs);
+int		sbrequest(char value, int cs);
 #endif

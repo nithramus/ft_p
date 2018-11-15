@@ -6,7 +6,7 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 12:21:11 by nithramir         #+#    #+#             */
-/*   Updated: 2018/11/09 20:17:12 by bandre           ###   ########.fr       */
+/*   Updated: 2018/11/15 22:36:03 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,14 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <sys/wait.h>
 
 int		cd(int cs, char *buff, char *mwd);
 void	exit_error(int err);
 int		grequest(int cs, char *mwd);
 int		screquest(int cs, char *response, int size);
 int		pwd(int cs);
-int		ls(int cs);
+int		ls(int cs, char *params);
 char	*garequest(int cs, int *size);
 int		upload(int cs, char *buff);
 int		download(int cs, char *filename);
