@@ -6,7 +6,7 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 22:33:40 by nithramir         #+#    #+#             */
-/*   Updated: 2018/11/15 22:13:45 by bandre           ###   ########.fr       */
+/*   Updated: 2018/11/15 22:44:34 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	send_filename(char *filename, int cs)
 		return (-1);
 	if (!(garequest(cs, NULL)))
 		return (-1);
+	free(real_filename);
 	return (0);
 }
 
