@@ -6,7 +6,7 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 01:05:51 by nithramir         #+#    #+#             */
-/*   Updated: 2018/11/15 22:45:14 by bandre           ###   ########.fr       */
+/*   Updated: 2018/11/21 18:37:23 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	sbrequest(char value, int cs)
 	if (!(response = garequest(cs, NULL)))
 		return (-1);
 	ft_putstr(response + 1);
+	free(response);
 	return (0);
 }
 

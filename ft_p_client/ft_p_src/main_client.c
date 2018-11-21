@@ -6,7 +6,7 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 21:23:47 by bandre            #+#    #+#             */
-/*   Updated: 2018/11/14 19:01:16 by bandre           ###   ########.fr       */
+/*   Updated: 2018/11/21 18:47:03 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	create_client(char *addr, int port)
 int	main(int argc, char **argv)
 {
 	int		sock;
-	char	command[4096];
+	char	*command;
 	int		r;
 	int		con;
 
@@ -50,10 +50,10 @@ int	main(int argc, char **argv)
 		exit_error(1);
 	sock = create_client(argv[1], atoi(argv[2]));
 	ft_putstr("$> ");
-	while ((r = read(0, command, 4095)) != 0)
+	while ((r = get_next_line(0, &command)) != 0)
 	{
-		command[r - 1] = '\0';
 		con = request(command, sock);
+		free(command);
 		if (con == -2)
 		{
 			close(sock);

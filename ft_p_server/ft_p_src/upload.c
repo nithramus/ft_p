@@ -6,7 +6,7 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/21 14:56:17 by nithramir         #+#    #+#             */
-/*   Updated: 2018/11/13 18:55:36 by bandre           ###   ########.fr       */
+/*   Updated: 2018/11/21 18:12:51 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	receivef(int cs, int fd)
 		ret = 1;
 	else
 		ret = 0;
-	ft_printf("receivef data number %d\n", (int)data[0]);
 	free(data);
 	return (ret);
 }

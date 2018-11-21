@@ -6,13 +6,14 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 12:21:11 by nithramir         #+#    #+#             */
-/*   Updated: 2018/11/15 22:21:06 by bandre           ###   ########.fr       */
+/*   Updated: 2018/11/21 18:44:05 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_P_H
 # define FT_P_H
 # include "libft/libft/libft.h"
+# include "libft/libft/get_next_line.h"
 # include "libft/ft_printf/ft_printf.h"
 # include "libft_chained_list/libft_chained_list_src/libft_chained_list.h"
 # include <sys/types.h>

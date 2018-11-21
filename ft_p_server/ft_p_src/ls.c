@@ -6,13 +6,43 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 18:08:58 by nithramir         #+#    #+#             */
-/*   Updated: 2018/11/15 22:25:40 by bandre           ###   ########.fr       */
+/*   Updated: 2018/11/21 18:20:08 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_p.h"
 
-int	ls(int cs, char *params)
+void	freechartab(char **tab)
+{
+	int	i;
+
+	if (!tab)
+		return ;
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+}
+
+void	exec_function(char *params, int link[2])
+{
+	char	**parsed;
+	char	*final_params;
+
+	parsed = ft_strsplit(params, ' ');
+	if (parsed && parsed[0] && parsed[0][0] == '-')
+		final_params = parsed[0];
+	else
+		final_params = NULL;
+	dup2(link[1], STDOUT_FILENO);
+	close(link[0]);
+	close(link[1]);
+	execl("/bin/ls", "ls", final_params, NULL);
+}
+
+int		ls(int cs, char *params)
 {
 	int		link[2];
 	pid_t	pid;
@@ -24,10 +54,7 @@ int	ls(int cs, char *params)
 	pid = fork();
 	if (pid == 0)
 	{
-		dup2(link[1], STDOUT_FILENO);
-		close(link[0]);
-		close(link[1]);
-		execl("/bin/ls", "ls", ft_strsplit(params, ' ')[0], NULL);
+		exec_function(params, link);
 	}
 	else
 	{

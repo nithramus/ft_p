@@ -79,6 +79,7 @@ SRC_NAME = ft_atoi.c\
 		   ft_itoa_base_signed.c\
 		   ft_itoa_base.c\
 		   print_memory.c\
+		   get_next_line.c\
 
 SRC_PRINTF = ft_affichage.c\
 			 ft_gestion_flag.c\

@@ -6,7 +6,7 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 00:39:02 by nithramir         #+#    #+#             */
-/*   Updated: 2018/11/09 21:17:14 by bandre           ###   ########.fr       */
+/*   Updated: 2018/11/21 18:35:27 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int		cd(char *request, int cs)
 	char	*filename;
 	char	*tmp;
 	int		ret;
+	char	*data;
 
 	filename = get_filename(request);
 	if (!filename)
@@ -28,9 +29,10 @@ int		cd(char *request, int cs)
 	ft_strcpy(tmp + 1, filename);
 	if ((ret = screquest(tmp, cs, -1)) == -1)
 		return (-1);
-	if (!(garequest(cs, NULL)))
+	if (!(data = garequest(cs, NULL)))
 		return (-1);
 	free(filename);
 	free(tmp);
+	free(data);
 	return (0);
 }

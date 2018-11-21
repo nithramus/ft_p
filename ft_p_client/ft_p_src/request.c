@@ -6,7 +6,7 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 19:51:47 by nithramir         #+#    #+#             */
-/*   Updated: 2018/11/15 22:17:56 by bandre           ###   ########.fr       */
+/*   Updated: 2018/11/21 18:58:13 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ char	*garequest(int cs, int *size)
 	if (data[0] == 51)
 	{
 		ft_putendl(data + 1);
+		free(data);
 		return (NULL);
 	}
 	return (data);

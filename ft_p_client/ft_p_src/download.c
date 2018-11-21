@@ -6,32 +6,52 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 12:01:54 by nithramir         #+#    #+#             */
-/*   Updated: 2018/11/14 20:02:26 by bandre           ###   ########.fr       */
+/*   Updated: 2018/11/21 18:35:56 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_p.h"
 
+int	semessage(int cs, char *string)
+{
+	char	*msg;
+
+	if (!(msg = malloc(2 + ft_strlen(string))))
+		return (-1);
+	msg[0] = 51;
+	ft_strcpy(msg + 1, string);
+	if (screquest(msg, cs, -1) == -1)
+	{
+		free(msg);
+		return (-1);
+	}
+	free(msg);
+	return (-1);
+}
+
 int	request_file(char *filename, int cs)
 {
 	char	buff[1096];
+	char	*data;
 
 	buff[0] = 5;
 	ft_strcpy(buff + 1, filename);
 	if (screquest(buff, cs, -1) == -1)
 		return (-1);
-	if (!(garequest(cs, NULL)))
+	if (!(data = garequest(cs, NULL)))
 		return (-1);
+	free(data);
 	return (1);
 }
 
-int	create_file(char *filename)
+int	create_file(char *filename, int cs)
 {
 	int	fd;
 
 	if ((fd = open(filename, O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR)) == -1)
 	{
 		ft_putendl("Failed creating file");
+		semessage(cs, "failed creating file");
 		return (-1);
 	}
 	return (fd);
@@ -46,8 +66,7 @@ int	receive_file(char *filename, int cs)
 
 	con = 1;
 	size = 1;
-	if ((fd = create_file(filename)) == -1)
-		return (-1);
+	fd = create_file(filename, cs);
 	while (con)
 	{
 		data = garequest(cs, &size);
@@ -55,7 +74,8 @@ int	receive_file(char *filename, int cs)
 		{
 			if (data[0] != 6)
 				con = 0;
-			write(fd, data + 1, size - 1);
+			if (fd != -1)
+				write(fd, data + 1, size - 1);
 			free(data);
 		}
 		else

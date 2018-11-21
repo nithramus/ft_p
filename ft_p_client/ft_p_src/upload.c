@@ -6,7 +6,7 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 22:33:40 by nithramir         #+#    #+#             */
-/*   Updated: 2018/11/15 22:44:34 by bandre           ###   ########.fr       */
+/*   Updated: 2018/11/21 18:38:27 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	send_filename(char *filename, int cs)
 {
 	char	buff[4096];
 	char	*real_filename;
+	char	*data;
 
 	buff[0] = 4;
 	if ((real_filename = get_real_filename(filename)) == NULL)
@@ -23,9 +24,10 @@ int	send_filename(char *filename, int cs)
 	ft_strcpy(buff + 1, real_filename);
 	if (screquest(buff, cs, -1) == -1)
 		return (-1);
-	if (!(garequest(cs, NULL)))
+	if (!(data = garequest(cs, NULL)))
 		return (-1);
 	free(real_filename);
+	free(data);
 	return (0);
 }
 
@@ -41,7 +43,7 @@ int	send_file(int fd, int cs)
 			return (-1);
 	}
 	buff[0] = 7;
-	if (r == 0)
+	if (r <= 0)
 		screquest(buff, cs, 1);
 	return (0);
 }
